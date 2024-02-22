@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Home from "./page/Home";
-import DeleteDiary from "./page/DeleteDiary";
-import UpdateDiary from "./page/UpdateDiary";
-import ShowDiary from "./page/ShowDiary";
-import CreateDiary from "./page/CreateDiary";
+import Home from "./pages/Home";
+import DeleteDiary from "./pages/DeleteDiary";
+import UpdateDiary from "./pages/UpdateDiary";
+import ShowDiary from "./pages/ShowDiary";
+import CreateDiary from "./pages/CreateDiary";
+import Error from "./pages/Error";
 
 
 function App() {

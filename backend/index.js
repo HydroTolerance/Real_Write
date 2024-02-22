@@ -8,13 +8,14 @@ import diaryRoutes from "./routes/diaryRoutes.js";
 const app = express();
 
 //middleware
-app.use(
+app.use(cors());
+/* app.use(
   cors({
     origin: "http://localhost:5173/",
     methods: ["GET", "PUT", "POST", "DELETE"],
     allowedHeaders: ["Content-Type"]
   })
-);
+); */
 
 app.use(express.json());
 app.use("/diary", diaryRoutes);
