@@ -1,7 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { BackButton } from "../components/BackButton";
+import Spinner from "../components/Spinner";
+import { useParams } from "react-router-dom";
 
 export default function ShowDiary() {
+  const [diary, setDiary] = useState({});
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get(`http://localhost:5555/diary/${id}`).then((res) => {
+      setDiary(res.data);
+      setLoading(false);
+    });
+  }, []);
+
   return (
-    <div>ShowDiary</div>
-  )
+    <div className="p-4">
+      <BackButton />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
+          <div className="my-4">
+            <span className="text-xl text-gray-500">Id</span>
+            <span>{diary._id}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl text-gray-500">Title</span>
+            <span>{diary.title}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl text-gray-500">Id</span>
+            <span>{diary.author}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl text-gray-500">Id</span>
+            <span>{diary.dateCreated}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl text-gray-500">Id</span>
+            <span>{new Date(diary.createdAt).toString()}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl text-gray-500">Id</span>
+            <span>{new Date(diary.updatedAt).toString()}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
