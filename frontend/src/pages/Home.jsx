@@ -5,10 +5,13 @@ import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import DiaryTable from "../components/home/DiaryTable";
+import DiaryCard from "../components/home/DiaryCard";
 
 export default function Home() {
   const [diary, setDiary] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showTable, setShowTable] = useState("table");
 
   useEffect(() => {
     axios
@@ -27,55 +30,28 @@ export default function Home() {
     <div className="p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl my-8"></h1>
+        <Link
+          className="text-sky-800 text-4xl"
+          onClick={() => setShowTable("table")}
+        >
+          Table
+        </Link>
+        <Link
+          className="text-sky-800 text-4xl"
+          onClick={() => setShowTable("card")}
+        >
+          Card
+        </Link>
         <Link to="/diary/create">
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>
       </div>
       {loading ? (
         <Spinner />
+      ) : showTable === "table" ? (
+        <DiaryTable diary={diary} />
       ) : (
-        <table className="w-full border-separate border-spacing-2">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Publisher</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {diary.map((diaries, index) => (
-              <tr key={diaries._id} className="h-8">
-                <td className="border border-slate-700 rounded-md text-center">
-                  {index + 1}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center">
-                  {diaries.title}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {diaries.author}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {diaries.dateCreated}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center">
-                  <div className="flex justify-center gap-x-4">
-                    <Link to={`/diary/display/${diaries._id}`}>
-                      <BsInfoCircle className="text-2xl text-green-800" />
-                    </Link>
-                    <Link to={`/diary/update/${diaries._id}`}>
-                      <AiOutlineEdit className="text-2xl text-yellow-800" />
-                    </Link>
-                    <Link to={`/diary/delete/${diaries._id}`}>
-                      <MdOutlineDelete className="text-2xl text-red-800" />
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <DiaryCard diary={diary} />
       )}
     </div>
   );

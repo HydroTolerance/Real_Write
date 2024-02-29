@@ -3,103 +3,103 @@ import { Diary } from "../models/diaryModel.js";
 
 const router = express.Router();
 //Route for displaying all data
-router.get("/", async (request, response) => {
+router.get("/", async (req, res) => {
   try {
     const diary = await Diary.find({});
-    return response.status(200).json({
+    return res.status(200).json({
       count: diary.length,
       data: diary,
     });
   } catch (error) {
     console.log(error.message);
-    response.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 });
 
 //Route for displaying specific data
-router.get("/:id", async (request, response) => {
+router.get("/:id", async (req, res) => {
   try {
-    const { id } = request.params;
+    const { id } = req.params;
 
     const diaryId = await Diary.findById(id);
     if (!diaryId) {
-      return response.status(404).json({ message: "Their is no data" });
+      return res.status(404).json({ message: "Their is no data" });
     }
-    return response.status(200).json(diaryId);
+    return res.status(200).json(diaryId);
   } catch (error) {
     console.log(error.message);
-    response.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 });
 
 //Route for updating a diary
-router.put("/:id", async (request, response) => {
+router.put("/:id", async (req, res) => {
   try {
     if (
-      !request.body.title ||
-      !request.body.author ||
-      !request.body.dateCreated
+      !req.body.title ||
+      !req.body.author ||
+      !req.body.dateCreated
     ) {
-      return response
+      return res
         .status(400)
         .send({ message: "Send the the title, author and datecreated" });
     }
 
-    const { id } = request.params;
+    const { id } = req.params;
 
-    const result = await Diary.findByIdAndUpdate(id, request.body);
+    const result = await Diary.findByIdAndUpdate(id, req.body);
 
     if (!result) {
-      return response
+      return res
         .status(404)
         .json({ message: "The diary is not updating" });
     }
 
-    return response.status(200).send({ message: "The diary is updating" });
+    return res.status(200).send({ message: "The diary is updating" });
   } catch (error) {
     console.log(error.message);
-    response.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 });
 
 //Route for deleting diary
-router.delete("/:id", async (request, response) => {
+router.delete("/:id", async (req, res) => {
   try {
-    const { id } = request.params;
+    const { id } = req.params;
 
     const result = await Diary.findByIdAndDelete(id);
     if (!result) {
-      return response.status(404).json({ message: "Diary not found" });
+      return res.status(404).json({ message: "Diary not found" });
     }
-    return response.status(200).send({ message: "Diary is Deleted" });
+    return res.status(200).send({ message: "Diary is Deleted" });
   } catch (error) {
     console.log(error.message);
-    return response.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 });
 
 //Route for creating a diary
-router.post("/", async (request, response) => {
+router.post("/", async (req, res) => {
   try {
     if (
-      !request.body.title ||
-      !request.body.author ||
-      !request.body.dateCreated
+      !req.body.title ||
+      !req.body.author ||
+      !req.body.dateCreated
     ) {
-      return response.status(201).send({
+      return res.status(201).send({
         message: "Sending Loves to my homie the title, publish, and created",
       });
     }
     const newDiary = {
-      title: request.body.title,
-      author: request.body.author,
-      dateCreated: request.body.dateCreated,
+      title: req.body.title,
+      author: req.body.author,
+      dateCreated: req.body.dateCreated,
     };
     const diary = await Diary.create(newDiary);
-    return response.status(201).send(diary);
+    return res.status(201).send(diary);
   } catch (error) {
     console.log(error.message);
-    response.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 });
 

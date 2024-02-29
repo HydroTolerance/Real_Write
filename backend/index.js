@@ -22,7 +22,7 @@ app.use("/diary", diaryRoutes);
 
 app.get("/", (request, response) => {
   console.log(request);
-  return response.status(244).send("Welcome to Rice Field Bitch");
+  return response.status(200).send("Welcome to Rice Field Bitch");
 });
 
 //MongoDB
