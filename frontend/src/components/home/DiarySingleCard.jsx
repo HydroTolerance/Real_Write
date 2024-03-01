@@ -1,11 +1,15 @@
 import { PiBookOpenTextLight } from "react-icons/pi";
-import { BiUserCircle } from "react-icons/bi";
+import { BiUserCircle, BiShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import { useState } from "react";
+import DiaryModal from "./DiaryModal";
 
 export default function DiarySingleCard({ diaries }) {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div
       key={diaries._id}
@@ -24,6 +28,12 @@ export default function DiarySingleCard({ diaries }) {
         <h2 className="my-2">{diaries.author}</h2>
       </div>
       <div className="flex justify-between diariess-center gap-x-2 mt-4 p-4">
+        <BiShow
+          className="text-3xl text-blue-800 hover:text-black cursor-pointer"
+          onClick={() => 
+            setShowModal(true)
+          }
+        />
         <Link to={`/diary/display/${diaries._id}`}>
           <BsInfoCircle className="text-2xl text-green-500 hover:text-black" />
         </Link>
@@ -34,6 +44,9 @@ export default function DiarySingleCard({ diaries }) {
           <MdOutlineDelete className="text-2xl text-red-500 hover:text-black" />
         </Link>
       </div>
+      {showModal && (
+        <DiaryModal diaries={diaries} onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 }
