@@ -3,7 +3,7 @@ import axios from "axios";
 import { BackButton } from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 export default function CreateDiary() {
   const [title, setTitle] = useState("");
@@ -23,7 +23,7 @@ export default function CreateDiary() {
       .post("http://localhost:5555/diary", data)
       .then(() => {
         setLoading(false);
-        toast.success("Diary Created");
+        toast("Diary Created");
         navigate("/");
       })
       .catch((error) => {

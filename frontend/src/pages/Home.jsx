@@ -31,13 +31,13 @@ export default function Home() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl my-8"></h1>
         <Link
-          className="text-sky-800 text-4xl"
+          className="text-xl font-medium bg-pink-400 rounded px-5 text-white"
           onClick={() => setShowTable("table")}
         >
           Table
         </Link>
         <Link
-          className="text-sky-800 text-4xl"
+          className="text-xl font-medium  px-5 bg-pink-400 rounded text-white"
           onClick={() => setShowTable("card")}
         >
           Card
