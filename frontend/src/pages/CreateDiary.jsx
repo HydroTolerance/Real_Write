@@ -37,8 +37,8 @@ export default function CreateDiary() {
     <div className="m-4p-4">
       <BackButton />
       <h1>Create Diary</h1>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-sky-600 rounded-xl w-[600px] p-4 mx-auto">
+      {loading ? (<Spinner />) : (
+        <div className="flex flex-col border-2 border-sky-600 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Title</label>
           <input
@@ -70,6 +70,8 @@ export default function CreateDiary() {
           Save
         </button>
       </div>
+      )}
+      
     </div>
   );
 }

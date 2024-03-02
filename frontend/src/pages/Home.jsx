@@ -7,6 +7,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import DiaryTable from "../components/home/DiaryTable";
 import DiaryCard from "../components/home/DiaryCard";
+import Layout from "../layout/Layout";
 
 export default function Home() {
   const [diary, setDiary] = useState([]);
@@ -27,17 +28,19 @@ export default function Home() {
   }, []);
 
   return (
+    <Layout>
+
     <div className="p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl my-8"></h1>
         <Link
-          className="text-xl font-medium bg-pink-400 rounded px-5 text-white"
+          className="text-xl font-medium bg-pink-400 rounded px-5 text-white hover:bg-pink-500"
           onClick={() => setShowTable("table")}
         >
           Table
         </Link>
         <Link
-          className="text-xl font-medium  px-5 bg-pink-400 rounded text-white"
+          className="text-xl font-medium  px-5 bg-pink-400 rounded text-white hover:bg-pink-500"
           onClick={() => setShowTable("card")}
         >
           Card
@@ -54,5 +57,6 @@ export default function Home() {
         <DiaryCard diary={diary} />
       )}
     </div>
+    </Layout>
   );
 }
