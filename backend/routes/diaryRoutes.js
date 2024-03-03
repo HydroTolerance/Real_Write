@@ -35,11 +35,7 @@ router.get("/:id", async (req, res) => {
 //Route for updating a diary
 router.put("/:id", async (req, res) => {
   try {
-    if (
-      !req.body.title ||
-      !req.body.author ||
-      !req.body.dateCreated
-    ) {
+    if (!req.body.title || !req.body.author || !req.body.description || !req.body.dateCreated) {
       return res
         .status(400)
         .send({ message: "Send the the title, author and datecreated" });
@@ -50,9 +46,7 @@ router.put("/:id", async (req, res) => {
     const result = await Diary.findByIdAndUpdate(id, req.body);
 
     if (!result) {
-      return res
-        .status(404)
-        .json({ message: "The diary is not updating" });
+      return res.status(404).json({ message: "The diary is not updating" });
     }
 
     return res.status(200).send({ message: "The diary is updating" });
@@ -84,6 +78,7 @@ router.post("/", async (req, res) => {
     if (
       !req.body.title ||
       !req.body.author ||
+      !req.body.description ||
       !req.body.dateCreated
     ) {
       return res.status(201).send({
@@ -93,6 +88,7 @@ router.post("/", async (req, res) => {
     const newDiary = {
       title: req.body.title,
       author: req.body.author,
+      description: req.body.description,
       dateCreated: req.body.dateCreated,
     };
     const diary = await Diary.create(newDiary);

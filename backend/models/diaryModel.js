@@ -8,6 +8,10 @@ const diarySchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   dateCreated: {
     type: Number,
     required: true,

@@ -9,20 +9,20 @@ import "froala-editor/css/froala_style.css";
 import "froala-editor/js/plugins.pkgd.min.js";
 import FroalaEditor from "react-froala-wysiwyg";
 import ReactDOM from "react-dom";
-import Froalaeditor from "froala-editor";
 
 export default function CreateDiary() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [dateCreated, setdateCreated] = useState("");
+  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSaveDiary = () => {
     const data = {
       title,
+      description,
       author,
-      dateCreated,
+      dateCreated: Date.now(),
     };
     setLoading(true);
     axios
@@ -42,39 +42,40 @@ export default function CreateDiary() {
   return (
     <div className="m-4p-4">
       <BackButton />
-      <h1>Create Diary</h1>
+      <h1 className="text-center text-2xl mb-4">Create Diary</h1>
       {loading ? (
         <Spinner />
       ) : (
         <div className="flex flex-col border-2 border-sky-600 rounded-xl w-[600px] p-4 mx-auto">
           <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Title:</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="border-2 border-grey-500 px-4 w-full "
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Author:</label>
+            <select onChange={(e) => setAuthor(e.target.value)} value={author}>
+              <option value="Angry">Angry</option>
+              <option value="Sad">Sad</option>
+              <option value="Angry">Angry</option>
+            </select>
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Description:</label>
             <FroalaEditor
               config={{
                 placeholderText: "Here you can use editor option and events",
+                height: "200px",
               }}
-              model={title}
-              onModelChange={(model) => setTitle(model)}
-            />
-            <label className="text-xl mr-4 text-gray-500">Title</label>
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Author</label>
-            <input
-              type="text"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-              className="border-2 border-grey-500 px-4 py-2 w-full "
+              model={description}
+              onModelChange={(model) => setDescription(model)}
             />
           </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Date Created</label>
-            <input
-              type="number"
-              value={dateCreated}
-              onChange={(e) => setdateCreated(e.target.value)}
-              className="border-2 border-grey-500 px-4 py-2 w-full "
-            />
-          </div>
+          <div className="my-4"></div>
           <button className="p-2 bg-sky-300 m-8" onClick={handleSaveDiary}>
             Save
           </button>
