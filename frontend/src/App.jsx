@@ -8,18 +8,16 @@ import ShowDiary from "./pages/ShowDiary";
 import CreateDiary from "./pages/CreateDiary";
 import Error from "./pages/Error";
 
-
 function App() {
   return (
     <>
       <Routes>
-        <Route index element={<Home/>}></Route>
-        <Route path="/home" element={<Home/>}></Route>
-        <Route path="/diary/create" element={<CreateDiary/>}></Route>
-        <Route path="/diary/display/:id" element={<ShowDiary/>}></Route>
-        <Route path="/diary/update/:id" element={<UpdateDiary/>}></Route>
-        <Route path="/diary/delete/:id" element={<DeleteDiary/>}></Route>
-        <Route path="*" element={<Error/>}/>
+        <Route index element={<Home />}></Route>
+        <Route path="/home" element={<Home />}></Route>
+        <Route path="/diary/create" element={<CreateDiary />}></Route>
+        <Route path="/diary/display/:id" element={<ShowDiary />}></Route>
+        <Route path="/diary/update/:id" element={<UpdateDiary />}></Route>
+        <Route path="/diary/delete/:id" element={<DeleteDiary />}></Route>
       </Routes>
     </>
   );

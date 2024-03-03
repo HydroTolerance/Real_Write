@@ -29,8 +29,7 @@ export default function DiaryTable({ diary }) {
             <td className="border border-slate-700 rounded-md text-center">
               {index + 1}
             </td>
-            <td className="border border-slate-700 rounded-md text-center">
-              {diaries.title}
+            <td className="border border-slate-700 rounded-md text-center" dangerouslySetInnerHTML={{ __html: diaries.title }} >
             </td>
             <td className="border border-slate-700 rounded-md text-center max-md:hidden">
               {diaries.author}
