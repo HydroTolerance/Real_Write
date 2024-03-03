@@ -29,34 +29,36 @@ export default function Home() {
 
   return (
     <Layout>
+      <div>
+        <div className="flex justify-between">
+          <h1 className="text-3xl my-8"></h1>
+          <div className="">
+            <Link
+              className="text-xl font-medium border text-pink-500  border-pink-500 rounded px-5  hover:bg-pink-500"
+              onClick={() => setShowTable("table")}
+            >
+              Table
+            </Link>
+            <Link
+              className="text-xl font-medium  px-5 border text-pink-500 border-pink-500 rounded  hover:bg-pink-500"
+              onClick={() => setShowTable("card")}
+            >
+              Card
+            </Link>
+          </div>
 
-    <div className="p-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8"></h1>
-        <Link
-          className="text-xl font-medium bg-pink-400 rounded px-5 text-white hover:bg-pink-500"
-          onClick={() => setShowTable("table")}
-        >
-          Table
-        </Link>
-        <Link
-          className="text-xl font-medium  px-5 bg-pink-400 rounded text-white hover:bg-pink-500"
-          onClick={() => setShowTable("card")}
-        >
-          Card
-        </Link>
-        <Link to="/diary/create">
-          <MdOutlineAddBox className="text-sky-800 text-4xl" />
-        </Link>
+          <Link to="/diary/create">
+            <MdOutlineAddBox className="text-sky-800 text-4xl" />
+          </Link>
+        </div>
+        {loading ? (
+          <Spinner />
+        ) : showTable === "table" ? (
+          <DiaryTable diary={diary} />
+        ) : (
+          <DiaryCard diary={diary} />
+        )}
       </div>
-      {loading ? (
-        <Spinner />
-      ) : showTable === "table" ? (
-        <DiaryTable diary={diary} />
-      ) : (
-        <DiaryCard diary={diary} />
-      )}
-    </div>
     </Layout>
   );
 }

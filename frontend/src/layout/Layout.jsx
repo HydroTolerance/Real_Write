@@ -1,11 +1,13 @@
-import React from 'react'
-import Headbar from '../components/Headbar/Headbar'
+import React from "react";
+import Headbar from "../components/Headbar/Headbar";
+import Sidebar from "../components/Sidebar/Sidebar";
 
-export default function Layout({children}) {
+export default function Layout({ children }) {
   return (
     <>
-        <Headbar/>
-        <div>{children}</div>
+      <Sidebar />
+      <Headbar />
+      <div className="p-4 md:ml-64">{children}</div>
     </>
-  )
+  );
 }
