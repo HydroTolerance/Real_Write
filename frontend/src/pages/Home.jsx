@@ -34,13 +34,13 @@ export default function Home() {
           <h1 className="text-3xl my-8"></h1>
           <div className="">
             <Link
-              className="text-xl font-medium border text-pink-500  border-pink-500 rounded px-5  hover:bg-pink-500"
+              className="font-medium border text-pink-500  border-pink-500 bg-white rounded px-5 hover:text-white  hover:bg-pink-500 py-1 mx-1"
               onClick={() => setShowTable("table")}
             >
               Table
             </Link>
             <Link
-              className="text-xl font-medium  px-5 border text-pink-500 border-pink-500 rounded  hover:bg-pink-500"
+              className="font-medium  px-5 border text-pink-500 border-pink-500 rounded bg-white hover:text-white  hover:bg-pink-500 py-1 mx-1"
               onClick={() => setShowTable("card")}
             >
               Card

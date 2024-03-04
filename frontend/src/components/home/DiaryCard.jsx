@@ -8,7 +8,7 @@ import DiarySingleCard from "./DiarySingleCard";
 
 export default function DiaryCard({ diary }) {
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
       {diary.map((item) => (
         <DiarySingleCard key={item._id} diaries={item} />
       ))}
