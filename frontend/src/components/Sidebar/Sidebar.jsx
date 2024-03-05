@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Headbar from "../Headbar/Headbar";
+import { CiMenuBurger } from "react-icons/ci";
 
 export default function Sidebar() {
   const [closeSide, setCloseSide] = useState(false);
@@ -13,13 +14,13 @@ export default function Sidebar() {
         }`}
       >
         <div className="h-full bg-pink-400 border relative">
+          <button
+            className="p-2 rounded text-white absolute right-0"
+            onClick={() => setCloseSide(!closeSide)}
+          >
+            <CiMenuBurger className="text-xl" />
+          </button>
           <ul className="absolute top-10 right-0 left-0 text-center">
-            <button
-              className="bg-red-500 p-2 rounded text-white"
-              onClick={() => setCloseSide(!closeSide)}
-            >
-              asdfasdfasdf
-            </button>
             <li>
               <li>
                 <div className="border-2 rounded-full w-28 h-28 mx-auto mb-5"></div>

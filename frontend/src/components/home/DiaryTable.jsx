@@ -4,7 +4,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import FroalaEditorView from "react-froala-wysiwyg/FroalaEditorView";
 import { Space, Table, Tag } from "antd";
-export default function DiaryTable({ diary }) {
+export default function DiaryTable({ diary, closeSide }) {
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
@@ -60,7 +60,7 @@ export default function DiaryTable({ diary }) {
     },
   ];
   return (
-    <div className="shadow mx-auto">
+    <div className="shadow mx-auto bg-white rounded">
       <Table
         columns={columns}
         dataSource={diary.map((item, index) => ({ ...item, index }))}
