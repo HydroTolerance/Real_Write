@@ -4,7 +4,7 @@ const diarySchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  author: {
+  mood: {
     type: String,
     required: true,
   },

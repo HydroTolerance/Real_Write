@@ -20,14 +20,14 @@ export default function DiaryTable({ diary, closeSide }) {
     },
     {
       title: "Mood",
-      dataIndex: "author",
+      dataIndex: "mood",
       filters: [
         {
           text: "asdfasdfdsf",
           value: "asdfasdfdsf",
         },
       ],
-      onFilter: (value, record) => record.author.startsWith(value),
+      onFilter: (value, record) => record.mood.startsWith(value),
       filterSearch: true,
     },
     {

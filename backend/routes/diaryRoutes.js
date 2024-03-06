@@ -35,10 +35,15 @@ router.get("/:id", async (req, res) => {
 //Route for updating a diary
 router.put("/:id", async (req, res) => {
   try {
-    if (!req.body.title || !req.body.author || !req.body.description || !req.body.dateCreated) {
+    if (
+      !req.body.title ||
+      !req.body.mood ||
+      !req.body.description ||
+      !req.body.dateCreated
+    ) {
       return res
         .status(400)
-        .send({ message: "Send the the title, author and datecreated" });
+        .send({ message: "Send the the title, mood and datecreated" });
     }
 
     const { id } = req.params;
@@ -77,7 +82,7 @@ router.post("/", async (req, res) => {
   try {
     if (
       !req.body.title ||
-      !req.body.author ||
+      !req.body.mood ||
       !req.body.description ||
       !req.body.dateCreated
     ) {
@@ -87,7 +92,7 @@ router.post("/", async (req, res) => {
     }
     const newDiary = {
       title: req.body.title,
-      author: req.body.author,
+      mood: req.body.mood,
       description: req.body.description,
       dateCreated: req.body.dateCreated,
     };
