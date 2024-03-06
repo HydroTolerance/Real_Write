@@ -3,11 +3,16 @@ import axios from "axios";
 import { BackButton } from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import { useNavigate, useParams } from "react-router-dom";
+import "froala-editor/css/froala_editor.pkgd.min.css";
+import "froala-editor/css/froala_style.css";
+import "froala-editor/js/plugins.pkgd.min.js";
+import FroalaEditor from "react-froala-wysiwyg";
+import ReactDOM from "react-dom";
 
 export default function UpdateDiary() {
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [dateCreated, setdateCreated] = useState("");
+  const [mood, setMood] = useState("");
+  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -19,8 +24,8 @@ export default function UpdateDiary() {
       .get(`http://localhost:5555/diary/${id}`)
       .then((res) => {
         setTitle(res.data.title);
-        setAuthor(res.data.author);
-        setdateCreated(res.data.dateCreated);
+        setMood(res.data.mood);
+        setDescription(res.data.description);
         setLoading(false);
       })
       .catch((err) => {
@@ -33,8 +38,8 @@ export default function UpdateDiary() {
   const handleUpdateDiary = () => {
     const data = {
       title,
-      author,
-      dateCreated,
+      mood,
+      description,
     };
     setLoading(true);
     axios
@@ -51,44 +56,52 @@ export default function UpdateDiary() {
   };
 
   return (
-    <div className="m-4p-4">
-      <BackButton />
-      <h1>Edit Diary</h1>
-      {loading ? (<Spinner />) : (
-        <div className="flex flex-col border-2 border-sky-600 rounded-xl w-[600px] p-4 mx-auto">
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="border-2 border-grey-500 px-4 py-2 w-full "
-          />
+    <div className="m-4 p-4">
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="flex flex-col border-4 border-pink-500 border-dashed rounded-xl w-[800px] max-lg:w-[600px] max-md:w-[400px] p-4 mx-auto bg-white">
+          <BackButton />
+          <h1 className="text-center font-bold text-2xl mb-4 text-pink-500 ">
+            EDIT DIARY
+          </h1>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Title</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">mood</label>
+            <input
+              type="text"
+              value={mood}
+              onChange={(e) => setMood(e.target.value)}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Date Created</label>
+            <FroalaEditor
+              config={{
+                placeholderText: "Here you can use editor option and events",
+                height: "200px",
+              }}
+              model={description}
+              onModelChange={(model) => setDescription(model)}
+            />
+          </div>
+          <button
+            className="p-2 m-8 bg-pink-500 font-bold text-white rounded"
+            onClick={handleUpdateDiary}
+          >
+            Save
+          </button>
         </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Author</label>
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            className="border-2 border-grey-500 px-4 py-2 w-full "
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Date Created</label>
-          <input
-            type="number"
-            value={dateCreated}
-            onChange={(e) => setdateCreated(e.target.value)}
-            className="border-2 border-grey-500 px-4 py-2 w-full "
-          />
-        </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleUpdateDiary}>
-          Save
-        </button>
-      </div>
       )}
-      
     </div>
   );
 }
